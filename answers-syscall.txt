@@ -1,0 +1,2 @@
+1. usertracp() at kernel/trap.c:67
+2. p->trapframe->a7 == 7 == SYS_exec
