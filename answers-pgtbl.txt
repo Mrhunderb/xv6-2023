@@ -1,0 +1,40 @@
+int fork()
+int exit(int status)
+int wait(int *status)
+int kill(int pid)
+int getpid()
+int sleep(int n)
+int exec(char *file, char *argv[])
+char *sbrk(int n)
+int open(char *file, int flags)
+int write(int fd, char *buf, int n)
+int read(int fd, char *buf, int n)
+int close(int fd)
+int dup(int fd)
+int pipe(int p[])
+int chdir(char *dir)
+int mkdir(char *dir)
+int mknod(char *file, int, int)
+int fstat(int fd, struct stat *st)
+int stat(char *file, struct stat *st)
+int link(char *file1, char *file2)
+int unlink(char *file)Create a process, return child’s PID.
+Terminate the current process; status reported to wait(). No return.
+Wait for a child to exit; exit status in *status; returns child PID.
+Terminate process PID. Returns 0, or -1 for error.
+Return the current process’s PID.
+Pause for n clock ticks.
+Load a file and execute it with arguments; only returns if error.
+Grow process’s memory by n bytes. Returns start of new memory.
+Open a file; flags indicate read/write; returns an fd (file descriptor).
+Write n bytes from buf to file descriptor fd; returns n.
+Read n bytes into buf; returns number read; or 0 if end of file.
+Release open file fd.
+Return a new file descriptor referring to the same file as fd.
+Create a pipe, put read/write file descriptors in p[0] and p[1].
+Change the current directory.
+Create a new directory.
+Create a device file.
+Place info about an open file into *st.
+Place info about a named file into *st.
+Create another nam
