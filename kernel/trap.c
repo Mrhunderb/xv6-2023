@@ -77,8 +77,16 @@ usertrap(void)
     exit(-1);
 
   // give up the CPU if this is a timer interrupt.
-  if(which_dev == 2)
-    yield();
+  if(which_dev == 2) {
+    if(p->interval == 0 && p->handler == 0) {
+      yield();
+    } else {
+      p->nticks++;
+      if(p->nticks == p->interval) {
+        p->trapframe->epc = (uint64)p->handler;
+      } 
+    }
+  }
 
   usertrapret();
 }
@@ -112,7 +120,7 @@ usertrapret(void)
   
   // set S Previous Privilege mode to User.
   unsigned long x = r_sstatus();
-  x &= ~SSTATUS_SPP; // clear SPP to 0 for user mode
+  x &= ~SSTATUS_SPP; // user mode
   x |= SSTATUS_SPIE; // enable interrupts in user mode
   w_sstatus(x);
 
