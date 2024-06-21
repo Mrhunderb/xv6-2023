@@ -149,7 +149,8 @@ found:
   // Set for alarm
   p->nticks = 0;
   p->interval = 0;
-  p->handler =  0;
+  p->handler = 0;
+  p->ishandle = 0;
 
   return p;
 }

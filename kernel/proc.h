@@ -108,5 +108,38 @@ struct proc {
   // alarm
   int nticks;                  // Ticks since the last call
   int interval;                // Interval call handler
+  int ishandle;                // Whether handler is called
   void *handler;               // Alarm handle function
+  uint64 sepc;
+  uint64 sra;
+  uint64 ssp;
+  uint64 sgp;
+  uint64 stp;
+  uint64 st0;
+  uint64 st1;
+  uint64 st2;
+  uint64 ss0;
+  uint64 ss1;
+  uint64 sa0;
+  uint64 sa1;
+  uint64 sa2;
+  uint64 sa3;
+  uint64 sa4;
+  uint64 sa5;
+  uint64 sa6;
+  uint64 sa7;
+  uint64 ss2;
+  uint64 ss3;
+  uint64 ss4;
+  uint64 ss5;
+  uint64 ss6;
+  uint64 ss7;
+  uint64 ss8;
+  uint64 ss9;
+  uint64 ss10;
+  uint64 ss11;
+  uint64 st3;
+  uint64 st4;
+  uint64 st5;
+  uint64 st6;
 };

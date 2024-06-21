@@ -78,13 +78,48 @@ usertrap(void)
 
   // give up the CPU if this is a timer interrupt.
   if(which_dev == 2) {
-    if(p->interval == 0 && p->handler == 0) {
-      yield();
+    p->nticks++;
+    if(p->nticks == p->interval && p->ishandle == 0) {
+      p->ishandle = 1;
+
+      p->sepc = p->trapframe->epc;
+      p->sra = p->trapframe->ra;
+      p->ssp = p->trapframe->sp;
+      p->sgp = p->trapframe->gp;
+      p->stp = p->trapframe->tp;
+      p->st0 = p->trapframe->t0;
+      p->st1 = p->trapframe->t1;
+      p->st2 = p->trapframe->t2;
+      p->ss0 = p->trapframe->s0;
+      p->ss1 = p->trapframe->s1;
+      p->sa0 = p->trapframe->a0;
+      p->sa1 = p->trapframe->a1;
+      p->sa2 = p->trapframe->a2;
+      p->sa3 = p->trapframe->a3;
+      p->sa4 = p->trapframe->a4;
+      p->sa5 = p->trapframe->a5;
+      p->sa6 = p->trapframe->a6;
+      p->sa7 = p->trapframe->a7;
+      p->ss2 = p->trapframe->s2;
+      p->ss3 = p->trapframe->s3;
+      p->ss4 = p->trapframe->s4;
+      p->ss5 = p->trapframe->s5;
+      p->ss6 = p->trapframe->s6;
+      p->ss7 = p->trapframe->s7;
+      p->ss8 = p->trapframe->s8;
+      p->ss9 = p->trapframe->s9;
+      p->ss10 = p->trapframe->s10;
+      p->ss11 = p->trapframe->s11;
+      p->st3 = p->trapframe->t3;
+      p->st4 = p->trapframe->t4;
+      p->st5 = p->trapframe->t5;
+      p->st6 = p->trapframe->t6;
+      // !!! trap process
+      p->trapframe->epc = (uint64)p->handler;
+
+      p->nticks = 0;
     } else {
-      p->nticks++;
-      if(p->nticks == p->interval) {
-        p->trapframe->epc = (uint64)p->handler;
-      } 
+      yield();
     }
   }
 
